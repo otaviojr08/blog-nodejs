@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<%- include('partials/header.ejs'); %>
+
+<body>
+    
+    <%- include('partials/navbar-guest.ejs'); %>
+
+    <div class="d-flex justify-content-center">
+        <h1 class="mt-4">Entrar</h1>
+    </div>
+
+    <div class="container d-flex justify-content-center">
+        <div class="form mt-4">
+
+            <form action="" method="POST">
+                <div class="mb-3">
+                    <label for="email-field" class="form-label">E-mail</label>
+                    <input type="email" class="form-control" name="email" id="email-field">
+                </div>
+                <div class="mb-3">
+                    <label for="password-field" class="form-label">Senha</label>
+                    <input type="password" class="form-control" name="password id="password-field">
+                </div>
+                <div class="mb-3 d-flex justify-content-center">
+                    <a href="/register">Cadastrar</a>
+                </div>
+                <div class="mb-3 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-success">Entrar</button>
+                </div>
+            </form>
+        
+        </div>
+        <!-- /Form  -->
+    </div>
+
+    <%- include('partials/scripts.ejs'); %>
+
+</body>
+</html>

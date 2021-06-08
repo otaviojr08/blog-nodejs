@@ -8,6 +8,10 @@ const Article = connection.define('articles', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    abstract: {
+        type: Sequelize.TEXT,
+        allowNull: false
+    },
     content: {
         type: Sequelize.TEXT,
         allowNull: false
