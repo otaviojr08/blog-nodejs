@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-br">
+
+<%- include('../../partials/header.ejs'); %>
+
+<body>
+    
+    <%- include('../../partials/navbar-admin.ejs'); %>
+
+    <div class="container">
+
+        <div class="d-flex justify-content-center">
+            <h1 class="mt-4">Gerenciar Categorias</h1>
+        </div>
+        
+        <hr>
+
+        <div class="">
+
+            <table class="table striped table-hover table-bordered border-success">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Título</th>
+                    <th>Slug</th>
+                    <th scope="col">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Programação Mobile</td>
+                    <td>programacao-mobile</td>
+                    <td>
+                        <a href="" class="btn btn-primary">Editar</a>
+                        <a href="" class="btn btn-danger">Apagar</a>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Nova Categoria
+            </button>
+        </div>
+        <!-- /Categories -->
+    </div>
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Criar Categoria</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/admin/category/create" method="POST">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                          <label for="title-field" class="col-form-label">Título</label>
+                          <input type="text" name="title" class="form-control" id="title-field">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Criar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+     </div>
+     <!-- /Modal  -->
+
+    <%- include('../../partials/scripts.ejs'); %>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-br">
+
+<%- include('../../partials/header.ejs'); %>
+
+<body>
+    
+    <%- include('../../partials/navbar-admin.ejs'); %>
+
+    <div class="container">
+
+        <div class="d-flex justify-content-center">
+            <h1 class="mt-4">Criar novo artigo</h1>
+        </div>
+        
+        <hr>
+
+        <div class="">
+            <form action="/admin/article/create" method="POST">
+                <div class="mb-3">
+                    <label for="title-field" class="form-label">Título</label>
+                    <input type="text" class="form-control" name="title" id="title-field">
+                </div>
+                <div class="mb-3">
+                    <label for="abstract-field" class="form-label">Resumo</label>
+                    <textarea name="abstract" class="form-control" id="abstract" aria-describedby="abstractHelp"></textarea>
+                    <div id="abstractHelp" class="form-text">Resumo do arquivo.</div>
+                </div>
+                <div class="mb-3">
+                    <textarea name="content" id="content-field"></textarea>
+                </div>
+                <div class="mb-3 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-success">Criar</button>
+                </div>
+            </form>
+        </div>
+        <!-- /Categories -->
+    </div>
+
+    <%- include('../../partials/scripts.ejs'); %>
+    <script src="/tinymce/js/tinymce/tinymce.min.js"></script>
+
+    <script>
+        tinymce.init({
+            language: 'pt_BR',
+            selector: '#content-field',
+            plugins: [
+                'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
+            ]
+        });
+    </script>
+
+</body>
+</html>
