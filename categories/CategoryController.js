@@ -4,7 +4,16 @@ const slugify = require('slugify');
 const Category = require('./Category');
 
 router.get('/list', (req, res) => {
-    res.render('admin/categories/category-list.ejs');
+    Category.findAll({
+        raw: true,
+        order: [
+            ['id', 'DESC']
+        ]
+    }).then(categories => {
+        res.render('admin/categories/category-list.ejs', {
+            categories
+        });
+    });
 });
 
 router.post('/create', (req, res) => {

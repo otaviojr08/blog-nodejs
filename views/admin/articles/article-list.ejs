@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-br">
+
+<%- include('../../partials/header.ejs'); %>
+
+<body>
+    
+    <%- include('../../partials/navbar-admin.ejs'); %>
+
+    <div class="container">
+
+        <div class="d-flex justify-content-center">
+            <h1 class="mt-4">Gerenciar Artigos</h1>
+        </div>
+        
+        <hr>
+
+        <div class="">
+            <table class="table striped table-hover table-bordered border-success">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Título</th>
+                    <th>Slug</th>
+                    <th scope="col">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% articles.forEach(article => { %>
+                        <tr>
+                          <th scope="row"><%= article.id %></th>
+                          <td><%= article.title %></td>
+                          <td><%= article.slug %></td>
+                          <td>
+                              <a href="/article/view/<%= article.slug %>" class="btn btn-secondary">Visualizar</a>
+                              <a href="" class="btn btn-primary">Editar</a>
+                              <a href="" class="btn btn-danger">Apagar</a>
+                          </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            <a href="/admin/article/new" class="btn btn-success">
+                Novo Artigo
+            </a>
+        </div>
+        <!-- /Articles -->
+    </div>
+
+    <%- include('../../partials/scripts.ejs'); %>
+
+</body>
+</html>

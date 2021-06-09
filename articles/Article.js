@@ -27,8 +27,7 @@ Category.hasMany(Article);
 Article.belongsTo(Category);
 User.hasMany(Article);
 Article.belongsTo(User);
-User.hasMany(Category);
-Category.belongsTo(User);
+
 
 Article.sync({force: false});
 

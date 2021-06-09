@@ -1,17 +1,30 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../users/User');
+const Category = require('../categories/Category');
 
-router.get('/', (req, res) => {
-    res.render('index.ejs');
-});
+Category.findAll({
+    raw: true
+}).then(categories => {
 
-router.get('/login', (req, res) => {
-    res.render('login.ejs');
-});
+    router.get('/', (req, res) => {
+        res.render('index.ejs',{
+            categories
+        });
+    });
+    
+    router.get('/login', (req, res) => {
+        res.render('login.ejs', {
+            categories
+        });
+    });
+    
+    router.get('/register', (req, res) => {
+        res.render('register.ejs', {
+            categories
+        });
+    });
 
-router.get('/register', (req, res) => {
-    res.render('register.ejs');
 });
 
 router.post('/user/new', (req, res) => {

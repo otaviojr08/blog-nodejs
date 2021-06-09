@@ -28,7 +28,7 @@ database.authenticate()
 
 //Use controllers
 app.use('/', GuestController);
-app.use('/admin/article', ArticleController);
+app.use('/', ArticleController);
 app.use('/admin/category', CategoryController);
 
 app.listen('8080', '127.0.0.1', error => {

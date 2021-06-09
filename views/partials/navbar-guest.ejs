@@ -14,11 +14,9 @@
               Categorias
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <% categories.forEach(category => { %>
+                <li class="border-bottom"><a class="dropdown-item" href="#"><%= category.title %></a></li>
+              <% }); %>
             </ul>
           </li>
         </ul>

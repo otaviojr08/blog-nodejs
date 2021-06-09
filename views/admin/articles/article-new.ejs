@@ -24,10 +24,18 @@
                 <div class="mb-3">
                     <label for="abstract-field" class="form-label">Resumo</label>
                     <textarea name="abstract" class="form-control" id="abstract" aria-describedby="abstractHelp"></textarea>
-                    <div id="abstractHelp" class="form-text">Resumo do arquivo.</div>
+                    <div id="abstractHelp" class="form-text">Resumo do artigo.</div>
                 </div>
                 <div class="mb-3">
-                    <textarea name="content" id="content-field"></textarea>
+                    <label for="category-field" class="form-label">Categoria</label>
+                    <select class="form-select" id="category-field" name="category">
+                        <% categories.forEach(category => { %>
+                            <option value="<%= category.id %>"><%= category.title %></option>
+                        <% }); %>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <textarea name="content" id="content-field" rows="10"></textarea>
                 </div>
                 <div class="mb-3 d-flex justify-content-center">
                     <button type="submit" class="btn btn-success">Criar</button>
