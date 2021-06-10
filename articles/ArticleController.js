@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const slugify = require('slugify');
+const adminAuth = require('../middlewares/adminAuth');
 const Article = require('./Article');
 const Category = require('../categories/Category');
 
-router.get('/admin/article/new', (req, res) => {
+router.get('/admin/article/new', adminAuth, (req, res) => {
     Category.findAll()
         .then(categories => {
             res.render('admin/articles/article-new.ejs', {
@@ -16,7 +17,7 @@ router.get('/admin/article/new', (req, res) => {
         });
 });
 
-router.get('/admin/article/list', (req, res) => {
+router.get('/admin/article/list', adminAuth, (req, res) => {
     Article.findAll({
         raw: true,
         order:[
@@ -41,7 +42,7 @@ router.get('/article/view/:slug', (req, res) => {
     });
 });
 
-router.post('/admin/article/create', (req, res) => {
+router.post('/admin/article/create', adminAuth, (req, res) => {
     Article.create({
         title: req.body.title,
         abstract: req.body.abstract,

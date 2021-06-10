@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const slugify = require('slugify');
+const adminAuth = require('../middlewares/adminAuth');
 const Category = require('./Category');
 
-router.get('/list', (req, res) => {
+router.get('/list', adminAuth, (req, res) => {
     Category.findAll({
         raw: true,
         order: [
@@ -16,7 +17,7 @@ router.get('/list', (req, res) => {
     });
 });
 
-router.post('/create', (req, res) => {
+router.post('/create', adminAuth, (req, res) => {
     let title = req.body.title;
     
     Category.create({

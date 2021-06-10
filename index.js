@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const database = require('./database/connection');
+const session = require('express-session');
 
 //Models database
 const Article = require('./articles/Article');
@@ -11,6 +12,7 @@ const User = require('./users/User');
 const GuestController = require('./guest/GuestController');
 const ArticleController = require('./articles/ArticleController');
 const CategoryController = require('./categories/CategoryController');
+const UserController = require('./users/UserController');
 
 //Configurations
 app.set('view engine', 'ejs');
@@ -26,10 +28,25 @@ database.authenticate()
         console.log(`Erro ao conectar com banco de dados: ${error}`)
     });
 
+//Session config
+app.use(session({
+    secret: 'mnbvcxz',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 960000
+    }
+}));
+
 //Use controllers
 app.use('/', GuestController);
 app.use('/', ArticleController);
 app.use('/admin/category', CategoryController);
+app.use('/user', UserController);
+
+app.get('/leitura', (req, res) => {
+    res.json(req.session.user);
+});
 
 app.listen('8080', '127.0.0.1', error => {
     if(error)
