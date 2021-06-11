@@ -10,7 +10,10 @@ Category.findAll({
 
     router.get('/', (req, res) => {
         Article.findAll({
-            raw: true
+            raw: true,
+            order:[
+                ['id', 'DESC']
+            ]
         }).then(articles => {
             res.render('index.ejs',{
                 categories,

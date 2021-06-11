@@ -21,7 +21,7 @@
                   <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Título</th>
-                    <th>Slug</th>
+                    <th>Categoria</th>
                     <th scope="col">Ações</th>
                   </tr>
                 </thead>
@@ -30,10 +30,10 @@
                         <tr>
                           <th scope="row"><%= article.id %></th>
                           <td><%= article.title %></td>
-                          <td><%= article.slug %></td>
+                          <td><%= article.category.title %></td>
                           <td>
                               <a href="/article/view/<%= article.slug %>" class="btn btn-secondary">Visualizar</a>
-                              <a href="" class="btn btn-primary">Editar</a>
+                              <a href="/admin/article/edit/<%= article.id %>" class="btn btn-primary">Editar</a>
                               <a href="" class="btn btn-danger">Apagar</a>
                           </td>
                         </tr>

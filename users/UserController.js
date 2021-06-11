@@ -19,7 +19,7 @@ router.post('/new', (req, res) => {
     });
 });
 
-router.post('/login', (req, res) => {
+router.post('/authenticate', (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
 
@@ -29,16 +29,22 @@ router.post('/login', (req, res) => {
         if(user && user.password === password){
             
             req.session.user = {
-                user
+                id: user.id,
+                name: user.name,
+                email: user.email
             };
 
-            res.render('admin/user/index.ejs', {
-                user
-            });
+            res.redirect('/admin/article/list');
 
         }else
             res.redirect('/login');
     }).catch(() => {
+        res.redirect('/login');
+    });
+});
+
+router.get('/logout', (req, res) => {
+    req.session.destroy(() => {
         res.redirect('/login');
     });
 });
