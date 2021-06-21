@@ -37,9 +37,9 @@ router.get('/article/view/:slug', (req, res) => {
         },
         include: Category
     }).then(article => {
-        console.log(article);
         res.render('article-view.ejs', {
-            article
+            article,
+            userAuth: (req.session.user) ? true : false
         });
     });
 });
@@ -74,7 +74,8 @@ router.post('/admin/article/create', adminAuth, (req, res) => {
         content: req.body.content,
         slug: slugify(req.body.title, {
             lower: true
-        })
+        }),
+        userId: req.session.user.id
     }).then(() => {
         res.redirect('/admin/article/list');
     });

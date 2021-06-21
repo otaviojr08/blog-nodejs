@@ -5,7 +5,11 @@
 
 <body>
     
-    <%- include('partials/navbar-admin.ejs'); %>
+    <% if(userAuth){ %>
+        <%- include('partials/navbar-admin.ejs'); %>
+    <% }else{ %>
+        <%- include('partials/navbar-guest.ejs'); %>
+    <% } %>
 
     <div class="container">
         <div class="row">

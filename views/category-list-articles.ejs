@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-br">
+
+<%- include('partials/header.ejs'); %>
+
+<body>
+    
+    <% if(userAuth){ %>
+        <%- include('partials/navbar-admin.ejs'); %>
+    <% }else{ %>
+        <%- include('partials/navbar-guest.ejs'); %>
+    <% } %>
+
+    <div class="container">
+
+        <div class="d-flex justify-content-center">
+            <h1 class="mt-4"><%= category.title %></h1>
+        </div>
+        
+        <hr>
+
+        <div class="articles">
+
+            <% if(articles.length != 0){ %>
+                
+                <% articles.forEach(article => { %>
+    
+                    <a href="/article/view/<%= article.slug %>">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4><%= article.title %></h4>
+                            </div>
+                                
+                            <div class="card-body">
+                                <%= article.abstract %>
+                            </div>
+                                
+                            <div class="card-footer d-flex justify-content-center">
+                                <%= article.updatedAt %>
+                            </div>
+                        </div>
+                        <!-- /Card  -->
+                    </a>
+                        
+                <% }); %>
+                
+            <% }else{ %>
+                <h4>
+                    Não há artigos para essa categoria. <a href="/register">Cadastre-se</a> e contribua com uma categoria.
+                </h4>
+            <% } %>
+
+        </div>
+        <!-- /Articles -->
+    </div>
+
+    <%- include('partials/scripts.ejs'); %>
+
+</body>
+</html>

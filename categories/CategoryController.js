@@ -24,7 +24,8 @@ router.post('/create', adminAuth, (req, res) => {
         title,
         slug: slugify(title, {
             lower: true
-        })  
+        }),
+        userId: req.session.user.id  
     }).then(() => {
         res.redirect('/admin/category/list');
     }).catch(error => {

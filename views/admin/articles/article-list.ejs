@@ -26,18 +26,24 @@
                   </tr>
                 </thead>
                 <tbody>
-                    <% articles.forEach(article => { %>
+                    <% if(articles.length != 0){ %>
+                        <% articles.forEach(article => { %>
+                            <tr>
+                              <th scope="row"><%= article.id %></th>
+                              <td><%= article.title %></td>
+                              <td><%= article.category.title %></td>
+                              <td>
+                                  <a href="/article/view/<%= article.slug %>" class="btn btn-secondary">Visualizar</a>
+                                  <a href="/admin/article/edit/<%= article.id %>" class="btn btn-primary">Editar</a>
+                                  <a href="/admin/article/delete/<%= article.id %>" class="btn btn-danger">Apagar</a>
+                              </td>
+                            </tr>
+                        <% }) %>
+                    <% }else{ %>
                         <tr>
-                          <th scope="row"><%= article.id %></th>
-                          <td><%= article.title %></td>
-                          <td><%= article.category.title %></td>
-                          <td>
-                              <a href="/article/view/<%= article.slug %>" class="btn btn-secondary">Visualizar</a>
-                              <a href="/admin/article/edit/<%= article.id %>" class="btn btn-primary">Editar</a>
-                              <a href="" class="btn btn-danger">Apagar</a>
-                          </td>
+                            <td colspan="4">Nenhum artigo cadastrado.</td>
                         </tr>
-                    <% }) %>
+                    <% } %>
                 </tbody>
             </table>
             <a href="/admin/article/new" class="btn btn-success">
