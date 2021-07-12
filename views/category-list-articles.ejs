@@ -45,9 +45,17 @@
                 <% }); %>
                 
             <% }else{ %>
-                <h4>
-                    Não há artigos para essa categoria. <a href="/register">Cadastre-se</a> e contribua com uma categoria.
-                </h4>
+
+                <% if(userAuth){ %>
+                    <p>
+                        Não há artigos para essa categoria. Você pode criar um novo artigo a qualquer momento. Para isso, acesse o menu <a href="/admin/article/list" style="color: #0d6efd;">"Artigos"</a>.
+                    </p>
+                <% }else{ %>
+                    <p>
+                        Não há artigos para essa categoria. <a href="/register" style="color: #0d6efd;">Registre-se</a> para criar um novo artigo.
+                    </p>
+                <% } %> 
+            
             <% } %>
 
         </div>

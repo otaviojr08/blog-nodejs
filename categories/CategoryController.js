@@ -7,6 +7,9 @@ const Category = require('./Category');
 router.get('/list', adminAuth, (req, res) => {
     Category.findAll({
         raw: true,
+        where:{
+            userId: req.session.user.id
+        },
         order: [
             ['id', 'DESC']
         ]
@@ -15,6 +18,45 @@ router.get('/list', adminAuth, (req, res) => {
             categories
         });
     });
+});
+
+router.post('/update', (req, res) => {
+    let id = req.body.id;
+    let title = req.body.title;
+
+    if(!isNaN(id)){
+        Category.findByPk(id).then(category => {
+            if(category){
+                Category.update({
+                    title: title,
+                    slug: slugify(title, {
+                        lower: true
+                    })
+                },{
+                    where: {id}
+                }).then(() => {
+                    res.redirect('/admin/category/list');                       
+                });
+            }else{
+                res.redirect('/admin/category/list');
+            }
+        });
+    }else
+        res.redirect('/admin/category/list');
+});
+
+router.get('/delete/:id', (req, res) => {
+    let id = req.params.id;
+
+    if(!isNaN(id)){
+        Category.destroy({
+            where: {id}
+        }).then(() => {
+            res.redirect('/admin/category/list');
+        });
+    }else{
+        res.redirect('/admin/category/list');
+    }
 });
 
 router.post('/create', adminAuth, (req, res) => {

@@ -28,11 +28,15 @@
                 </div>
                 <div class="mb-3">
                     <label for="category-field" class="form-label">Categoria</label>
-                    <select class="form-select" id="category-field" name="category">
-                        <% categories.forEach(category => { %>
-                            <option value="<%= category.id %>"><%= category.title %></option>
-                        <% }); %>
-                    </select>
+                    <% if(categories.length != 0){ %>
+                        <select class="form-select" id="category-field" name="category">
+                            <% categories.forEach(category => { %>
+                                <option value="<%= category.id %>"><%= category.title %></option>
+                            <% }); %>
+                        </select>
+                    <% }else{ %>
+                        <p>Não há categorias cadastradas.</p>
+                    <% } %>
                 </div>
                 <div class="mb-3">
                     <textarea name="content" id="content-field" rows="10"></textarea>

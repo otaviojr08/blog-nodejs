@@ -33,26 +33,30 @@
                               <td><%= category.title %></td>
                               <td><%= category.slug %></td>
                               <td>
-                                  <a href="" class="btn btn-primary">Editar</a>
-                                  <a href="" class="btn btn-danger">Apagar</a>
+                                <a href="/categories/<%= category.slug %>/<%= category.id %>" class="btn btn-secondary">
+                                    Visualizar
+                                </a>
+                                  <button class="btn btn-primary category-edit-btn" data-title-category="<%= category.title %>" data-id-category="<%= category.id %>" data-bs-toggle="modal" data-bs-target="#editCategoryModal">Editar</button>
+                                  <a href="/admin/category/delete/<%= category.id %>" class="btn btn-danger">Apagar</a>
                               </td>
                             </tr>
                         <% }) %>
                     <% }else{ %>
                         <tr>
-                            <td colspan="4">Nenhuma categoria cadastrada.</td>
+                            <td colspan="4">Você não criou nenhuma categoria.</td>
                         </tr>
                     <% } %>
                 </tbody>
             </table>
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#newCategoryModal">
                 Nova Categoria
             </button>
         </div>
         <!-- /Categories -->
     </div>
 
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <!-- Modal Create -->
+    <div class="modal fade" id="newCategoryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -63,7 +67,7 @@
                     <div class="modal-body">
                         <div class="mb-3">
                           <label for="title-field" class="col-form-label">Título</label>
-                          <input type="text" name="title" class="form-control" id="title-field">
+                          <input type="text" name="title" class="form-control" id="title-field-new">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -74,9 +78,48 @@
             </div>
         </div>
      </div>
-     <!-- /Modal  -->
+     <!-- /Modal Create -->
+
+    <!-- Modal Edit -->
+    <div class="modal fade" id="editCategoryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Editar Categoria</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/admin/category/update" method="POST">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                          <label for="title-field" class="col-form-label">Título</label>
+                          <input type="text" name="title" class="form-control" id="title-field-edit">
+                          <input type="hidden" name="id" id="id-field-edit">      
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Editar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /Modal  -->
 
     <%- include('../../partials/scripts.ejs'); %>
 
+    <script>
+        const inputTitleModalEl = document.querySelector('#title-field-edit');
+        const inputIdModalEl = document.querySelector('#id-field-edit');
+        const buttonsEl = document.querySelectorAll('.category-edit-btn');
+        
+        buttonsEl.forEach(btn => {
+            btn.addEventListener('click', event => {
+                inputTitleModalEl.value = event.target.dataset.titleCategory;
+                inputIdModalEl.value = event.target.dataset.idCategory;
+            });
+        });
+
+    </script>
 </body>
 </html>

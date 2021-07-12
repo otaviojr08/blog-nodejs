@@ -22,6 +22,9 @@ router.get('/admin/article/list', adminAuth, (req, res) => {
         order:[
             ['id', 'DESC']
         ],
+        where:{
+            userId: req.session.user.id
+        },
         include: Category
     }).then(articles => {
         res.render('admin/articles/article-list.ejs', {
@@ -44,7 +47,7 @@ router.get('/article/view/:slug', (req, res) => {
     });
 });
 
-router.get('/admin/article/edit/:id', (req, res) => {
+router.get('/admin/article/edit/:id', adminAuth, (req, res) => {
     let id = req.params.id;
     
     if(!isNaN(id)){
@@ -66,6 +69,20 @@ router.get('/admin/article/edit/:id', (req, res) => {
         res.redirect('/admin/article/list');
 });
 
+router.get('/admin/article/delete/:id', adminAuth, (req, res) => {
+    let id = req.params.id;
+    
+    if(!isNaN(id)){
+        Article.destroy({
+            where:{id}
+        }).then(()=>{
+            res.redirect('/admin/article/list');
+        });
+    }else{
+        res.redirect('/admin/article/list');
+    }
+});
+
 router.post('/admin/article/create', adminAuth, (req, res) => {
     Article.create({
         title: req.body.title,
@@ -81,7 +98,7 @@ router.post('/admin/article/create', adminAuth, (req, res) => {
     });
 });
 
-router.post('/admin/article/update', (req, res) => {
+router.post('/admin/article/update', adminAuth, (req, res) => {
     Article.update({
         id: req.body.id,
         title: req.body.title,

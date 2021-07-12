@@ -19,15 +19,31 @@
         
         <hr>
 
-        <% categories.forEach(category => { %>
+        <% if(categories.length != 0){ %>
+            <% categories.forEach(category => { %>
+    
+                <div class="category bg-success">
+                    <a href="/categories/<%= category.slug %>/<%= category.id %>">
+                        <h3><%- category.title %> </h3>
+                    </a>            
+                </div>
+                
+                <br>
 
-            <div class="category bg-success">
-                <a href="/categories/<%= category.slug %>/<%= category.id %>">
-                    <h3><%- category.title %> </h3>
-                </a>            
-            </div>
-            <br>
-        <% }); %> 
+            <% }); %> 
+        <% }else{ %>
+
+            <% if(userAuth){ %>
+                <p>
+                    Não há categorias cadastradas. Você pode criar uma nova categoria a qualquer momento. Para isso, acesse o menu <a href="/admin/category/list">"Categorias > Gerenciar"</a>.
+                </p>
+           <% }else{ %>
+                <p>
+                    Não há categorias cadastradas. <a href="/register">Registre-se</a> para criar uma nova categoria.
+                </p>
+            <% } %> 
+    
+        <% } %>
 
     </div>
 

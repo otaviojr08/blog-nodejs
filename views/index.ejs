@@ -20,26 +20,42 @@
         <hr>
 
         <div class="articles">
-            <% articles.forEach(article => { %>
 
-                <a href="/article/view/<%= article.slug %>">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4><%= article.title %></h4>
+            <% if(articles.length != 0){ %>
+                <% articles.forEach(article => { %>
+    
+                    <a href="/article/view/<%= article.slug %>">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4><%= article.title %></h4>
+                            </div>
+                                
+                            <div class="card-body">
+                                <%= article.abstract %>
+                            </div>
+                                
+                            <div class="card-footer d-flex justify-content-center">
+                                <%= article.updatedAt %>
+                            </div>
                         </div>
-                            
-                        <div class="card-body">
-                            <%= article.abstract %>
-                        </div>
-                            
-                        <div class="card-footer d-flex justify-content-center">
-                            <%= article.updatedAt %>
-                        </div>
-                    </div>
-                    <!-- /Card  -->
-                </a>
-                    
-            <% }); %>
+                        <!-- /Card  -->
+                    </a>
+                        
+                <% }); %>
+            <% }else{ %>
+                
+                <% if(userAuth){ %>
+                    <p>
+                        Não há artigos cadastrados. Você pode criar um novo artigo a qualquer momento. Para isso, acesse o menu <a href="/admin/article/list" style="color: #0d6efd;">"Artigos"</a>.;.
+                    </p>
+               <% }else{ %>
+                    <p>
+                        Não há artigos cadastrados. <a href="/register" style="color: #0d6efd;">Registre-se</a> para criar um novo artigo.
+                    </p>
+                <% } %> 
+
+            <% } %>
+
         </div>
         <!-- /Articles -->
     </div>
